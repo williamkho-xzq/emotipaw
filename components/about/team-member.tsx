@@ -1,7 +1,7 @@
-import { TeamMember } from '@/types';
+import { TeamMember as TeamMemberType } from '@/types';
 
 interface TeamMemberProps {
-  member: TeamMember;
+  member: TeamMemberType;
 }
 
 export default function TeamMember({ member }: TeamMemberProps) {
