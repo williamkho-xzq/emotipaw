@@ -10,12 +10,12 @@ const testimonials: Testimonial[] = [
   {
     name: 'Sarah M.',
     text: "EmotiPaw helped me understand my cat's needs better. It's amazing!",
-    image: '/images/sarah.jpg',
+    image: '/sarah.jpg',
   },
   {
     name: 'John D.',
     text: 'I never knew my dog had such complex emotions. This app is a game-changer.',
-    image: '/images/john.jpg',
+    image: '/john.jpg',
   },
 ];
 
@@ -28,18 +28,25 @@ export default function Testimonials() {
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-              <div className="flex items-center mb-4">
+            <div
+              key={index}
+              className="bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row items-center"
+            >
+              <div className="mb-4 md:mb-0 md:mr-6">
                 <Image
                   src={testimonial.image}
                   alt={testimonial.name}
-                  width={60}
-                  height={60}
-                  className="rounded-full mr-4"
+                  width={120}
+                  height={120}
+                  className="rounded-full"
                 />
-                <h3 className="font-semibold">{testimonial.name}</h3>
               </div>
-              <p className="text-gray-600 italic">"{testimonial.text}"</p>
+              <div>
+                <h3 className="font-semibold text-lg mb-2">
+                  {testimonial.name}
+                </h3>
+                <p className="text-gray-600 italic">"{testimonial.text}"</p>
+              </div>
             </div>
           ))}
         </div>

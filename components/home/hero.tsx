@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       <Image
-        src="/images/happy-pet.jpg"
+        src="/happy-pet.jpg"
         alt="Happy pet"
         layout="fill"
         objectFit="cover"
