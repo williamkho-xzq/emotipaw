@@ -1,15 +1,17 @@
-import React from 'react';
+import Hero from '@/components/home/hero';
+import Features from '@/components/home/features';
+import HowItWorks from '@/components/home/how-it-works';
+import Testimonials from '@/components/home/testimonials';
+import CallToAction from '@/components/home/call-to-action';
 
-const Home: React.FC = () => {
+export default async function Home() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-4">Welcome to EmotiPaw</h1>
-      <p className="text-xl mb-4">
-        Understand your pet's emotions with our AI-powered technology.
-      </p>
-      {/* Add more content for the home page here */}
+    <div className="space-y-16">
+      <Hero />
+      <Features />
+      <HowItWorks />
+      <Testimonials />
+      <CallToAction />
     </div>
   );
-};
-
-export default Home;
+}
