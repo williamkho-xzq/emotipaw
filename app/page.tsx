@@ -4,14 +4,14 @@ import HowItWorks from '@/components/home/how-it-works';
 import Testimonials from '@/components/home/testimonials';
 import CallToAction from '@/components/home/call-to-action';
 
-export default async function Home() {
+export default function Home() {
   return (
-    <div className="space-y-16">
+    <main>
       <Hero />
       <Features />
       <HowItWorks />
       <Testimonials />
       <CallToAction />
-    </div>
+    </main>
   );
 }

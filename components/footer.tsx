@@ -1,39 +1,67 @@
+import Link from 'next/link';
+import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+
 export default function Footer() {
   return (
-    <footer className="bg-gray-800 text-white py-8">
+    <footer className="bg-gray-800 text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-between">
-          <div className="w-full md:w-1/3 mb-6 md:mb-0">
-            <h3 className="text-xl font-bold mb-2">EmotiPaw</h3>
-            <p>Understanding pet emotions through AI</p>
+        <div className="grid md:grid-cols-3 gap-8">
+          <div>
+            <h3 className="text-xl font-bold mb-4">EmotiPaw</h3>
+            <p className="mb-4">Understanding pet emotions through AI</p>
+            <div className="flex space-x-4">
+              <a href="#" className="text-2xl hover:text-accent">
+                <FaFacebook />
+              </a>
+              <a href="#" className="text-2xl hover:text-accent">
+                <FaTwitter />
+              </a>
+              <a href="#" className="text-2xl hover:text-accent">
+                <FaInstagram />
+              </a>
+            </div>
           </div>
-          <div className="w-full md:w-1/3 mb-6 md:mb-0">
-            <h4 className="text-lg font-semibold mb-2">Quick Links</h4>
-            <ul>
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2">
               <li>
-                <a href="/demo" className="hover:text-blue-300">
+                <Link href="/demo" className="hover:text-accent">
                   Try Demo
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about" className="hover:text-blue-300">
+                <Link href="/about" className="hover:text-accent">
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/contact" className="hover:text-blue-300">
+                <Link href="/contact" className="hover:text-accent">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
-          <div className="w-full md:w-1/3">
-            <h4 className="text-lg font-semibold mb-2">Connect With Us</h4>
-            <p>Follow us on social media for the latest updates</p>
-            {/* Add social media icons/links here */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Newsletter</h4>
+            <p className="mb-4">
+              Stay updated with our latest features and news
+            </p>
+            <form className="flex">
+              <input
+                type="email"
+                placeholder="Your email"
+                className="px-4 py-2 w-full text-gray-800 rounded-l-md focus:outline-none"
+              />
+              <button
+                type="submit"
+                className="bg-primary px-4 py-2 rounded-r-md hover:bg-blue-600 transition-colors"
+              >
+                Subscribe
+              </button>
+            </form>
           </div>
         </div>
-        <div className="mt-8 text-center">
+        <div className="mt-8 pt-8 border-t border-gray-700 text-center">
           <p>&copy; 2024 EmotiPaw. All rights reserved.</p>
         </div>
       </div>

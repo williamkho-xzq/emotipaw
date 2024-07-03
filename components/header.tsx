@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NavItem } from '@/types';
@@ -12,13 +13,27 @@ const navItems: NavItem[] = [
 ];
 
 export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="bg-blue-600 text-white">
-      <nav className="container mx-auto px-4 py-6">
+    <header
+      className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}
+    >
+      <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-2xl font-bold">
+          <Link
+            href="/"
+            className={`text-2xl font-bold ${isScrolled ? 'text-primary' : 'text-white'}`}
+          >
             EmotiPaw
           </Link>
           <ul className="flex space-x-6">
@@ -26,8 +41,12 @@ export default function Header() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`hover:text-blue-200 transition-colors ${
-                    pathname === item.href ? 'text-blue-200' : ''
+                  className={`hover:text-accent transition-colors ${
+                    pathname === item.href
+                      ? 'text-accent'
+                      : isScrolled
+                        ? 'text-gray-800'
+                        : 'text-white'
                   }`}
                 >
                   {item.label}
