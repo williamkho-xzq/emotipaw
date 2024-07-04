@@ -1,0 +1,6 @@
+I am developing a website in vercel and I have deployed my prototype.
+I have uploaded my typescript files with extension of ts or tsx in artifact. 
+Please note that the file named so it reflect the directory tree. For example components - home - testimonials.tsx refers to components/home/testimonials.tsx. 
+Now please show me the directory trees including all of the files
+
+Next, for all new subsequent file name must use lower case and for file imports please use alias and for all subsequent command line if possible please us pnpm
