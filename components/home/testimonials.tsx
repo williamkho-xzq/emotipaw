@@ -21,9 +21,9 @@ const testimonials: Testimonial[] = [
 
 export default function Testimonials() {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">
+        <h2 className="text-3xl font-bold text-center mb-12 text-primary-600">
           What Our Users Say
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
@@ -36,16 +36,18 @@ export default function Testimonials() {
                 <Image
                   src={testimonial.image}
                   alt={testimonial.name}
-                  width={120}
-                  height={120}
+                  width={80}
+                  height={80}
                   className="rounded-full"
                 />
               </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-2">
+              <div className="text-center md:text-left">
+                <p className="text-gray-600 italic mb-2">
+                  "{testimonial.text}"
+                </p>
+                <h3 className="font-semibold text-lg text-primary-600">
                   {testimonial.name}
                 </h3>
-                <p className="text-gray-600 italic">"{testimonial.text}"</p>
               </div>
             </div>
           ))}

@@ -1,82 +1,96 @@
 'use client';
 
-import { useState, ChangeEvent, FormEvent, Suspense, lazy } from 'react';
+import { useState, useTransition, Suspense } from 'react';
 import Image from 'next/image';
-import { EmotionResult } from '@/types';
-import { analyzePetEmotion } from '@/services/llm-api';
+import AnalysisResult from '@/components/demo/analysis-result';
 
-const DemoResult = lazy(() => import('./demo-result'));
+function LoadingFallback() {
+  return (
+    <div className="mt-8 p-4 bg-gray-100 rounded-lg">Analyzing image...</div>
+  );
+}
 
 export default function DemoUploader() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [result, setResult] = useState<EmotionResult | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setSelectedImage(file);
       setPreviewUrl(URL.createObjectURL(file));
-      setResult(null);
+      setUploadedImageUrl(null);
     }
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!selectedImage) return;
+  const handleAnalyze = async () => {
+    if (selectedImage) {
+      startTransition(async () => {
+        const formData = new FormData();
+        formData.append('image', selectedImage);
 
-    setIsLoading(true);
-    try {
-      const result = await analyzePetEmotion(selectedImage);
-      setResult(result);
-    } catch (error) {
-      console.error('Error analyzing image:', error);
-      // TODO: Handle error state
-    } finally {
-      setIsLoading(false);
+        try {
+          const response = await fetch('/api/upload-image', {
+            method: 'POST',
+            body: formData,
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to upload image');
+          }
+
+          const data = await response.json();
+          // setUploadedImageUrl(data.imageUrl);
+          setUploadedImageUrl(
+            'http://localhost:3000/_next/image?url=%2Fhappy-pet.jpg&w=3840&q=75'
+          );
+        } catch (error) {
+          console.error('Error uploading image:', error);
+          // Handle error (e.g., show an error message to the user)
+        }
+      });
     }
   };
 
   return (
     <div className="max-w-md mx-auto">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="hidden"
-            id="imageUpload"
-          />
-          <label
-            htmlFor="imageUpload"
-            className="cursor-pointer text-blue-600 hover:text-blue-800"
-          >
-            Select an image
-          </label>
-          {previewUrl && (
-            <div className="mt-4 relative w-full h-64">
-              <Image
-                src={previewUrl}
-                alt="Preview"
-                layout="fill"
-                objectFit="contain"
-              />
-            </div>
-          )}
-        </div>
-        <button
-          type="submit"
-          disabled={!selectedImage || isLoading}
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg disabled:bg-gray-400"
+      <div className="mb-4">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="hidden"
+          id="imageUpload"
+        />
+        <label
+          htmlFor="imageUpload"
+          className="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300"
         >
-          {isLoading ? 'Analyzing...' : 'Analyze Pet Emotion'}
-        </button>
-      </form>
-      {result && (
-        <Suspense fallback={<div>Loading result...</div>}>
-          <DemoResult result={result} />
+          Select an image
+        </label>
+        {previewUrl && (
+          <div className="mt-4 relative w-full h-64">
+            <Image
+              src={previewUrl}
+              alt="Preview"
+              layout="fill"
+              objectFit="contain"
+            />
+          </div>
+        )}
+      </div>
+      <button
+        onClick={handleAnalyze}
+        disabled={!selectedImage || isPending}
+        className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 disabled:bg-gray-400"
+      >
+        {isPending ? 'Analyzing...' : 'Analyze Pet Emotion'}
+      </button>
+      {uploadedImageUrl && (
+        <Suspense fallback={<LoadingFallback />}>
+          <AnalysisResult imageUrl={uploadedImageUrl} />
         </Suspense>
       )}
     </div>
