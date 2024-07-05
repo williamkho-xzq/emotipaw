@@ -10,6 +10,22 @@ export const metadata: Metadata = {
   title: 'EmotiPaw - AI Pet Emotion Recognition',
   description:
     "Understand your pet's emotions with our AI technology - Try it out now!",
+  icons: [
+    { rel: 'icon', url: '/favicons/favicon.ico' },
+    {
+      rel: 'icon',
+      url: '/favicons/favicon-16x16.png',
+      sizes: '16x16',
+      type: 'image/png',
+    },
+    {
+      rel: 'icon',
+      url: '/favicons/favicon-32x32.png',
+      sizes: '32x32',
+      type: 'image/png',
+    },
+    { rel: 'apple-touch-icon', url: '/favicons/apple-touch-icon.png' },
+  ],
 };
 
 export default function RootLayout({
@@ -22,6 +38,24 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="emotipaw">
       <head>
+        <link rel="icon" href="/favicons/favicon.ico" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicons/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicons/favicon-16x16.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/favicons/apple-touch-icon.png"
+        />
         {/* Preload all critical images */}
         {preloadImages.map((src, index) => (
           <link
