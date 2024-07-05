@@ -15,7 +15,7 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-
+    console.log(imageUrl);
     const response = await openai.chat.completions.create({
       model: 'gpt-4o',
       messages: [
@@ -29,7 +29,8 @@ export async function POST(request: Request) {
             {
               type: 'image_url',
               image_url: {
-                url: 'https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                // url: 'https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                url: imageUrl,
                 detail: 'auto',
               },
             },

@@ -30,10 +30,10 @@ const TryItOutPage = () => {
         return;
       }
 
-      // Check file size (max 5 MB)
-      const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
+      // Check file size (max 4.5 MB)
+      const maxSize = 4.5 * 1024 * 1024; // 4.5 MB in bytes
       if (file.size > maxSize) {
-        setError('File size exceeds 5 MB. Please upload a smaller image.');
+        setError('File size exceeds 4.5 MB. Please upload a smaller image.');
         resolve(false);
         return;
       }
@@ -97,18 +97,28 @@ const TryItOutPage = () => {
     try {
       const formData = new FormData();
       formData.append('image', file);
+      formData.append('filename', file.name);
 
-      const response = await axiosInstance.post('/api/upload-image', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axiosInstance.post(
+        `/api/upload-image?filename=${file.name}`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+
+      //   const response = await fetch(`/api/upload-image?filename=${file.name}`, {
+      //     method: 'POST',
+      //     body: file,
+      //   });
 
       //   remove this after implenting presigned url
-      //   return response.data.fileUrl;
+      return response.data.imageUrl;
 
       //   Temporary for local testing
-      return `http://localhost:3000/_next/image?url=%2Fhappy-pet.jpg&w=3840&q=75`;
+      //   return `http://localhost:3000/_next/image?url=%2Fhappy-pet.jpg&w=3840&q=75`;
     } catch (error) {
       console.error('Error uploading to local folder:', error);
       throw new Error('Failed to upload image to local folder');
@@ -223,7 +233,7 @@ const TryItOutPage = () => {
               <p className="text-sm text-gray-600 text-center mt-2">
                 Accepted formats: JPG, JPEG, PNG, GIF
                 <br />
-                Min size: 300x300 pixels | Max size: 4000x4000 pixels, 5 MB
+                Min size: 300x300 pixels | Max size: 4000x4000 pixels, 4.5 MB
               </p>
             </div>
 
