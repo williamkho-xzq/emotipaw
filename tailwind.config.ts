@@ -57,7 +57,23 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
+  daisyui: {
+    themes: [
+      // 'light',
+      // 'dark',
+      // 'cupcake',
+      {
+        emotipaw: {
+          primary: '#0056e6',
+          secondary: '#00e6ac',
+          accent: '#f59e0b',
+          neutral: '#3d4451',
+          'base-100': '#ffffff',
+        },
+      },
+    ],
+  },
 };
 
 export default config;

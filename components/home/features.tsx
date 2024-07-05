@@ -1,32 +1,29 @@
-import { IconType } from 'react-icons';
-import { FaRobot, FaUpload, FaBolt, FaPaw } from 'react-icons/fa';
+import Image from 'next/image';
 
 interface Feature {
   title: string;
   description: string;
-  icon: IconType;
+  image: string;
 }
 
 const features: Feature[] = [
   {
     title: 'AI-Powered Analysis',
-    description: 'Advanced algorithms to interpret pet emotions',
-    icon: FaRobot,
+    description:
+      "Experience the future of pet care with our cutting-edge AI technology. EmotiPaw's advanced algorithms analyze subtle facial expressions, body language, and vocalizations to accurately interpret your pet's emotions. Gain unprecedented insights into your furry friend's mental state and needs.",
+    image: '/images/features/ai-analysis.png',
   },
   {
     title: 'Easy to Use',
-    description: 'Simply upload a photo of your pet to get started',
-    icon: FaUpload,
+    description:
+      "Unlock the power of pet emotion recognition with just a few taps. Our user-friendly app makes it effortless to capture moments, receive instant analysis, and track your pet's emotional well-being over time. No technical expertise required – just point, click, and connect with your pet like never before.",
+    image: '/images/features/easy-to-use.png',
   },
   {
     title: 'Instant Results',
-    description: 'Receive emotion analysis in seconds',
-    icon: FaBolt,
-  },
-  {
-    title: 'Multiple Pet Types',
-    description: 'Works with dogs, cats, and more',
-    icon: FaPaw,
+    description:
+      "Say goodbye to guesswork and hello to immediate understanding. EmotiPaw delivers real-time emotion analysis, providing you with instant insights into your pet's feelings. Whether you're at home or away, stay connected to your pet's emotional state and respond to their needs promptly.",
+    image: '/images/features/instant-results.png',
   },
 ];
 
@@ -34,22 +31,27 @@ export default function Features() {
   return (
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12 text-primary-600 font-display">
-          Key Features
+        <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
+          Understand Your Pet Like Never Before
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1 hover:scale-105 transition-transform duration-300"
-            >
-              <div className="text-primary-500 mb-4">
-                <feature.icon className="text-5xl mx-auto" />
+            <div key={index} className="flex flex-col items-center text-center">
+              <div className="mb-6">
+                <Image
+                  src={feature.image}
+                  alt={feature.title}
+                  width={150}
+                  height={150}
+                  className="object-contain"
+                />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-center">
+              <h3 className="text-2xl font-semibold mb-3 text-gray-800">
                 {feature.title}
               </h3>
-              <p className="text-gray-600 text-center">{feature.description}</p>
+              <p className="text-gray-600 leading-relaxed">
+                {feature.description}
+              </p>
             </div>
           ))}
         </div>

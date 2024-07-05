@@ -2,19 +2,16 @@ import Link from 'next/link';
 
 export default function CallToAction() {
   return (
-    <section className="py-20 bg-gradient-to-r from-primary-500 to-secondary-500 text-white">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6 font-display">
-          Ready to Understand Your Pet?
+    <section className="py-12 bg-blue-600">
+      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 md:mb-0">
+          Ready to understand your pet better?
         </h2>
-        <p className="text-xl mb-8 max-w-2xl mx-auto">
-          Try EmotiPaw today and strengthen your bond with your furry friend.
-        </p>
         <Link
           href="/demo"
-          className="bg-white text-primary-600 px-10 py-4 rounded-full text-xl font-semibold hover:bg-primary-50 transition-colors duration-300 shadow-lg hover:shadow-xl inline-block"
+          className="bg-white text-blue-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-100 transition-colors duration-300 shadow-lg"
         >
-          Start Now
+          Try EmotiPaw Now
         </Link>
       </div>
     </section>

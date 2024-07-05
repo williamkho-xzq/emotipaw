@@ -2,17 +2,17 @@ import Hero from '@/components/home/hero';
 import MediaCoverage from '@/components/home/media-coverage';
 import Features from '@/components/home/features';
 import HowItWorks from '@/components/home/how-it-works';
-import Testimonials from '@/components/home/testimonials';
 import CallToAction from '@/components/home/call-to-action';
+import Experts from '@/components/home/experts';
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      <MediaCoverage />
       <Features />
       <HowItWorks />
-      <Testimonials />
+      <Experts />
+      <MediaCoverage />
       <CallToAction />
     </main>
   );
