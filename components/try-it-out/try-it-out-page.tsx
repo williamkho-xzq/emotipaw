@@ -199,21 +199,21 @@ const TryItOutPage = () => {
 
   return (
     <div className="min-h-screen py-16 pt-20">
-      <div className="container mx-auto px-4 py-16 max-w-4xl">
-        <h1 className="text-4xl font-bold text-center mb-8 text-primary">
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
+        <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
           Peek into Your Pet's Emotions
         </h1>
 
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="bg-white shadow-md rounded-lg overflow-hidden">
           <div className="p-6">
-            <p className="text-lg text-center mb-6">
+            <p className="text-lg text-center mb-6 text-gray-600">
               Upload a photo of your furry friend, and let our AI decode their
               mood!
             </p>
 
             <div className="flex flex-col items-center mb-8">
-              <label className="btn btn-primary flex items-center cursor-pointer mb-4">
-                <Upload className="mr-2" /> Upload Photo
+              <label className="btn btn-primary flex items-center cursor-pointer mb-4 rounded-md">
+                <Upload className="mr-2" size={18} /> Upload Photo
                 <input
                   type="file"
                   className="hidden"
@@ -223,14 +223,14 @@ const TryItOutPage = () => {
               </label>
               {error && (
                 <div
-                  className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4"
+                  className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mt-4 w-full max-w-md"
                   role="alert"
                 >
-                  <strong className="font-bold">Error: </strong>
+                  <strong className="font-medium">Error: </strong>
                   <span className="block sm:inline">{error}</span>
                 </div>
               )}
-              <p className="text-sm text-gray-600 text-center mt-2">
+              <p className="text-sm text-gray-500 text-center mt-2">
                 Accepted formats: JPG, JPEG, PNG, GIF
                 <br />
                 Min size: 300x300 pixels | Max size: 4000x4000 pixels, 4.5 MB
@@ -239,7 +239,7 @@ const TryItOutPage = () => {
 
             {selectedImage && (
               <div className="mb-6">
-                <div className="w-full h-64 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                <div className="w-full h-64 rounded-md overflow-hidden bg-gray-100 flex items-center justify-center border border-gray-200">
                   <img
                     src={selectedImage}
                     alt="Selected pet"
@@ -252,45 +252,59 @@ const TryItOutPage = () => {
             <button
               onClick={handleAnalyze}
               disabled={!uploadedImageUrl || isAnalyzing}
-              className="btn btn-accent w-full flex items-center justify-center"
+              className="btn btn-accent w-full flex items-center justify-center rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-150 ease-in-out"
             >
               {isAnalyzing ? (
-                <AlertCircle className="mr-2" />
+                <AlertCircle className="mr-2" size={18} />
               ) : (
-                <Wand2 className="mr-2" />
+                <Wand2 className="mr-2" size={18} />
               )}
               {isAnalyzing ? 'Analyzing...' : 'Analyze Pet Mood'}
             </button>
           </div>
 
           {analysisResult && (
-            <div className="bg-gray-100 p-6">
-              <h2 className="text-2xl font-semibold mb-4 text-primary">
+            <div className="bg-gray-50 p-6 border-t border-gray-200">
+              <h2 className="text-2xl font-semibold mb-4 text-gray-800">
                 Analysis Result
               </h2>
-              <div className="bg-white p-4 rounded-lg shadow-md prose max-w-none">
-                <ReactMarkdown>{analysisResult}</ReactMarkdown>
+              <div className="bg-white p-4 rounded-md shadow-sm border border-gray-200">
+                <ReactMarkdown className="prose max-w-none">
+                  {analysisResult}
+                </ReactMarkdown>
               </div>
             </div>
           )}
         </div>
 
-        <div className="mt-8 text-center">
-          <h3 className="text-2xl font-semibold mb-4">Why use EmotiPaw?</h3>
+        <div className="mt-12 text-center">
+          <h3 className="text-2xl font-semibold mb-6 text-gray-800">
+            Why use EmotiPaw?
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h4 className="font-semibold mb-2">Understand Your Pet</h4>
-              <p>Gain insights into your pet's emotional state and needs.</p>
+            <div className="bg-white p-5 rounded-md shadow-sm border border-gray-200">
+              <h4 className="font-semibold mb-2 text-gray-700">
+                Understand Your Pet
+              </h4>
+              <p className="text-gray-600">
+                Gain insights into your pet's emotional state and needs.
+              </p>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h4 className="font-semibold mb-2">Strengthen Your Bond</h4>
-              <p>
+            <div className="bg-white p-5 rounded-md shadow-sm border border-gray-200">
+              <h4 className="font-semibold mb-2 text-gray-700">
+                Strengthen Your Bond
+              </h4>
+              <p className="text-gray-600">
                 Deepen your connection by responding to your pet's feelings.
               </p>
             </div>
-            <div className="bg-white p-4 rounded-lg shadow">
-              <h4 className="font-semibold mb-2">Track Mood Over Time</h4>
-              <p>Monitor your pet's emotional well-being and spot trends.</p>
+            <div className="bg-white p-5 rounded-md shadow-sm border border-gray-200">
+              <h4 className="font-semibold mb-2 text-gray-700">
+                Track Mood Over Time
+              </h4>
+              <p className="text-gray-600">
+                Monitor your pet's emotional well-being and spot trends.
+              </p>
             </div>
           </div>
         </div>
