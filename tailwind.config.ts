@@ -33,6 +33,7 @@ const config: Config = {
           800: '#004d3a',
           900: '#001a13',
         },
+        accent: '#f59e0b',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
@@ -57,7 +58,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui'), require('@tailwindcss/typography')],
   daisyui: {
     themes: [
       // 'light',

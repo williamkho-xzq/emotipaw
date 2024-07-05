@@ -8,7 +8,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'EmotiPaw - AI Pet Emotion Recognition',
-  description: "Understand your pet's emotions with AI technology",
+  description:
+    "Understand your pet's emotions with our AI technology - Try it out now!",
 };
 
 export default function RootLayout({

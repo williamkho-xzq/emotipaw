@@ -40,8 +40,8 @@ export async function POST(request: Request) {
 
     const analysis =
       response.choices[0]?.message?.content || 'Unable to generate analysis.';
-
-    return NextResponse.json({ analysis });
+    // console.log(analysis);
+    return NextResponse.json(analysis);
   } catch (error) {
     console.error('Error analyzing image:', error);
     return NextResponse.json(

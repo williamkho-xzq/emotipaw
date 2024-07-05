@@ -22,8 +22,8 @@ export default function Hero() {
             EmotiPaw uses AI to decode your pet's feelings, helping you build a
             stronger bond.
           </p>
-          <Link href="/demo" className="btn btn-primary">
-            Try Demo
+          <Link href="/try-it-out" className="btn btn-primary">
+            Try It Out
           </Link>
         </div>
       </div>

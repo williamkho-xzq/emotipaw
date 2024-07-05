@@ -25,8 +25,8 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/demo" className="hover:text-accent">
-                  Try Demo
+                <Link href="/try-it-out" className="hover:text-accent">
+                  Try It Out
                 </Link>
               </li>
               <li>

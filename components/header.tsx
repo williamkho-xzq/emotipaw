@@ -8,7 +8,7 @@ import { NavItem } from '@/types';
 
 const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'Demo', href: '/demo' },
+  { label: 'Try It Out', href: '/try-it-out' },
   { label: 'Meet Our Team', href: '/team' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -66,8 +66,8 @@ export default function Header() {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link href="/demo" className="btn btn-primary btn-lg">
-          Try Demo
+        <Link href="/try-it-out" className="btn btn-primary btn-lg">
+          Try It Out
         </Link>
       </div>
     </header>

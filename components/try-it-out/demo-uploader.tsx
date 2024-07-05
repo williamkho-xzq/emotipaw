@@ -2,7 +2,7 @@
 
 import { useState, useTransition, Suspense } from 'react';
 import Image from 'next/image';
-import AnalysisResult from '@/components/demo/analysis-result';
+import AnalysisResult from '@/components/try-it-out/analysis-result';
 
 function LoadingFallback() {
   return (

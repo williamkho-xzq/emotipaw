@@ -8,7 +8,7 @@ export default function CallToAction() {
           Ready to understand your pet better?
         </h2>
         <Link
-          href="/demo"
+          href="/try-it-out"
           className="bg-white text-blue-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-blue-100 transition-colors duration-300 shadow-lg"
         >
           Try EmotiPaw Now
