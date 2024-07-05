@@ -2,6 +2,7 @@ import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Layout from '@/components/layout';
+import { getAllPreloadImages } from '@/utils/preloadImages';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,8 +16,22 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const preloadImages = getAllPreloadImages();
+
   return (
     <html lang="en" data-theme="emotipaw">
+      <head>
+        {/* Preload all critical images */}
+        {preloadImages.map((src, index) => (
+          <link
+            key={index}
+            rel="preload"
+            href={src}
+            as="image"
+            type={src.endsWith('.jpg') ? 'image/jpeg' : 'image/png'}
+          />
+        ))}
+      </head>
       <body className={inter.className}>
         <Layout>{children}</Layout>
       </body>

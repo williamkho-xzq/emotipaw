@@ -44,6 +44,7 @@ export default function Features() {
                   width={150}
                   height={150}
                   className="object-contain"
+                  loading="lazy"
                 />
               </div>
               <h3 className="text-2xl font-semibold mb-3 text-gray-800">
