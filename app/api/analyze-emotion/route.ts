@@ -24,7 +24,7 @@ export async function POST(request: Request) {
           content: [
             {
               type: 'text',
-              text: 'Analyze this pet image and describe its emotional state. Include details about facial expressions and body language.',
+              text: '1. Identify if the image contains a dog or a cat. 2. If it does, proceed with the analysis. If not, stop here. 3. Analyze this pet image and describe its emotional state. Include details about facial expressions and body language.',
             },
             {
               type: 'image_url',
