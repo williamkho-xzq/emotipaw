@@ -65,11 +65,7 @@ export default function Header() {
           ))}
         </ul>
       </div>
-      <div className="navbar-end">
-        <Link href="/try-it-out" className="btn btn-primary btn-lg">
-          Try It Out
-        </Link>
-      </div>
+      <div className="navbar-end"></div>
     </header>
   );
 }
