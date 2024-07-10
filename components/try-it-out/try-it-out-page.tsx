@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Upload, Wand2, AlertCircle } from 'lucide-react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
@@ -16,6 +16,8 @@ const TryItOutPage = () => {
   const [analysisResult, setAnalysisResult] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const validateImage = (file: File): Promise<boolean> => {
     return new Promise((resolve) => {
@@ -93,6 +95,10 @@ const TryItOutPage = () => {
     }
   };
 
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
   const uploadToLocalFolder = async (file: File): Promise<string> => {
     try {
       const formData = new FormData();
@@ -132,6 +138,7 @@ const TryItOutPage = () => {
     if (file) {
       setError(null);
       try {
+        setIsUploading(true);
         const isValid = await validateImage(file);
         if (isValid) {
           //   For production: use getPresignedUrl and uploadToS3
@@ -152,6 +159,8 @@ const TryItOutPage = () => {
         }
         setSelectedImage(null);
         setUploadedImageUrl(null);
+      } finally {
+        setIsUploading(false);
       }
     }
   };
@@ -213,13 +222,30 @@ const TryItOutPage = () => {
 
             <div className="flex flex-col items-center mb-8">
               <label className="btn btn-primary flex items-center cursor-pointer mb-4 rounded-md">
-                <Upload className="mr-2" size={18} /> Upload Photo
                 <input
+                  ref={fileInputRef}
                   type="file"
-                  className="hidden"
-                  onChange={handleImageUpload}
                   accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
                 />
+                <button
+                  onClick={handleUploadClick}
+                  disabled={isUploading}
+                  className="w-full text-white py-2 px-4 rounded-md transition duration-300 disabled:opacity-50 flex items-center justify-center"
+                >
+                  {isUploading ? (
+                    <>
+                      <div className="animate-spin mr-2 w-5 h-5 border-2 border-white border-t-transparent rounded-full"></div>
+                      Uploading...
+                    </>
+                  ) : (
+                    <>
+                      <Upload className="mr-2" size={20} />
+                      Upload Photo
+                    </>
+                  )}
+                </button>
               </label>
               {error && (
                 <div
@@ -255,7 +281,7 @@ const TryItOutPage = () => {
               className="btn btn-accent w-full flex items-center justify-center rounded-md text-white bg-blue-600 hover:bg-blue-700 transition duration-150 ease-in-out"
             >
               {isAnalyzing ? (
-                <AlertCircle className="mr-2" size={18} />
+                <div className="animate-spin mr-2 w-5 h-5 border-2 border-white border-t-transparent rounded-full"></div>
               ) : (
                 <Wand2 className="mr-2" size={18} />
               )}
