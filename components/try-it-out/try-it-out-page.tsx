@@ -1,14 +1,33 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { Upload, Wand2, AlertCircle } from 'lucide-react';
+import { Upload, Wand2, AlertCircle, Option } from 'lucide-react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
+import NewFeatureBanner from '@/components/try-it-out/new-feature-banner';
+import {
+  ModelSelect,
+  Option as ModelSelectOption,
+} from '@/components/try-it-out/model-select';
+import { ModelType } from '@/types';
 
 // Create a custom axios instance with default configuration
 const axiosInstance = axios.create({
   timeout: 10000, // 10 seconds timeout
 });
+
+const modelOptions = [
+  {
+    value: ModelType.LITE,
+    label: 'EmotiPaw Lite',
+    description: 'Precision Basics',
+  },
+  {
+    value: ModelType.PRO,
+    label: 'EmotiPaw Pro',
+    description: 'Enhanced Insights',
+  },
+] as const;
 
 const TryItOutPage = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -18,6 +37,9 @@ const TryItOutPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedOption, setSelectedOption] = useState<ModelSelectOption>(
+    modelOptions[0]
+  );
 
   const validateImage = (file: File): Promise<boolean> => {
     return new Promise((resolve) => {
@@ -48,9 +70,9 @@ const TryItOutPage = () => {
             'Image dimensions are too small. Minimum size is 300x300 pixels.'
           );
           resolve(false);
-        } else if (img.width > 4000 || img.height > 4000) {
+        } else if (img.width > 4032 || img.height > 4032) {
           setError(
-            'Image dimensions are too large. Maximum size is 4000x4000 pixels.'
+            'Image dimensions are too large. Maximum size is 4032x4032 pixels.'
           );
           resolve(false);
         } else {
@@ -192,7 +214,15 @@ const TryItOutPage = () => {
     setIsAnalyzing(true);
     setError(null);
     try {
-      const result = await analyzeImage(uploadedImageUrl);
+      let result;
+      if (selectedOption.value === ModelType.LITE) {
+        result = await analyzeImage(uploadedImageUrl);
+      } else {
+        // Placeholder for advanced analysis
+        console.log('Advanced analysis selected');
+        result = 'Advanced analysis results would appear here.';
+      }
+
       setAnalysisResult(result);
     } catch (error) {
       if (error instanceof Error) {
@@ -204,6 +234,16 @@ const TryItOutPage = () => {
     } finally {
       setIsAnalyzing(false);
     }
+  };
+
+  const handleModelChange = (option: ModelSelectOption) => {
+    setSelectedOption(option);
+    console.log('Selected model:', option.value);
+    // Add your logic here to handle the model change
+  };
+
+  const handleDecodeNowClick = () => {
+    setSelectedOption(modelOptions[1]);
   };
 
   return (
@@ -220,8 +260,13 @@ const TryItOutPage = () => {
               mood!
             </p>
 
-            <div className="flex flex-col items-center mb-8">
-              <label className="btn btn-primary flex items-center cursor-pointer mb-4 rounded-md">
+            <div className="flex justify-center flex-wrap">
+              <ModelSelect
+                options={modelOptions}
+                selectedOption={selectedOption}
+                onChange={handleModelChange}
+              />
+              <label className="btn btn-primary flex items-center cursor-pointer mb-4 rounded-md m-0.5">
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -247,6 +292,8 @@ const TryItOutPage = () => {
                   )}
                 </button>
               </label>
+            </div>
+            <div className="flex flex-col items-center mb-4">
               {error && (
                 <div
                   className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md mt-4 w-full max-w-md"
@@ -302,6 +349,8 @@ const TryItOutPage = () => {
             </div>
           )}
         </div>
+
+        <NewFeatureBanner onDecodeNowClick={handleDecodeNowClick} />
 
         <div className="mt-12 text-center">
           <h3 className="text-2xl font-semibold mb-6 text-gray-800">

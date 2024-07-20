@@ -20,3 +20,8 @@ export interface EmotionResult {
   confidence: number;
   explanation: string;
 }
+
+export enum ModelType {
+  LITE = 'Lite',
+  PRO = 'Expert',
+}
