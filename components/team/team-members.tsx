@@ -8,14 +8,14 @@ interface TeamMember {
 
 const teamMembers: TeamMember[] = [
   {
-    name: 'Jane Doe',
+    name: 'Emily Sullivan',
     role: 'Founder & CEO',
-    image: '/images/team/jane-doe.jpg',
+    image: '/images/team/emily-sullivan.jpg',
   },
   {
-    name: 'John Smith',
+    name: 'Alexander Thompson',
     role: 'CTO',
-    image: '/images/team/john-smith.jpg',
+    image: '/images/team/alexander-thompson.jpg',
   },
   {
     name: 'Alice Johnson',
@@ -28,14 +28,14 @@ const teamMembers: TeamMember[] = [
     image: '/images/team/mike-lee.jpg',
   },
   {
-    name: 'Sarah Chen',
+    name: 'Nur Aisyah',
     role: 'Data Scientist',
-    image: '/images/team/sarah-chen.jpg',
+    image: '/images/team/nur-aisyah.jpg',
   },
   {
-    name: 'David Nkosi',
+    name: 'Thabo Okonkwo',
     role: 'Mobile App Developer',
-    image: '/images/team/david-nkosi.jpg',
+    image: '/images/team/thabo-okonkwo.jpg',
   },
   {
     name: 'Emily Rodriguez',
@@ -43,14 +43,14 @@ const teamMembers: TeamMember[] = [
     image: '/images/team/emily-rodriguez.jpg',
   },
   {
-    name: 'Alex Patel',
+    name: 'Arjun Sharma',
     role: 'Machine Learning Engineer',
-    image: '/images/team/alex-patel.jpg',
+    image: '/images/team/arjun-sharma.jpg',
   },
   {
-    name: 'Olivia Kim',
+    name: 'Soo-Yun Park',
     role: 'Frontend Developer',
-    image: '/images/team/olivia-kim.jpg',
+    image: '/images/team/soo-yun-park.jpg',
   },
 ];
 

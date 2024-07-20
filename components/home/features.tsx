@@ -9,7 +9,7 @@ const features: Feature[] = [
   {
     title: 'AI-Powered Analysis',
     description:
-      "Experience the future of pet care with our cutting-edge AI technology. EmotiPaw's advanced algorithms analyze subtle facial expressions, body language, and vocalizations to accurately interpret your pet's emotions.",
+      "Experience the future of pet care with our cutting-edge AI technology, developed under the guidance of veterinary experts. EmotiPaw's advanced algorithms analyze subtle facial expressions, body language, and vocalizations to accurately interpret your pet's emotions.",
   },
   {
     title: 'Easy to Use',

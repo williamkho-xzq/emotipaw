@@ -38,7 +38,7 @@ export default function Footer() {
                   href="/try-it-out"
                   className="hover:text-blue-400 transition duration-150 ease-in-out"
                 >
-                  Try Demo
+                  Try It Out
                 </Link>
               </li>
               <li>
