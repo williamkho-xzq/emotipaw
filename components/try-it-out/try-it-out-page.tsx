@@ -27,7 +27,7 @@ const modelOptions = [
     label: 'EmotiPaw Pro',
     description: 'Enhanced Insights',
   },
-] as const;
+];
 
 const TryItOutPage = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
