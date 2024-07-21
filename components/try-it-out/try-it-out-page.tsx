@@ -159,6 +159,7 @@ const TryItOutPage = () => {
     const file = event.target.files?.[0];
     if (file) {
       setError(null);
+      // const start = new Date();
       try {
         setIsUploading(true);
         const isValid = await validateImage(file);
@@ -183,6 +184,9 @@ const TryItOutPage = () => {
         setUploadedImageUrl(null);
       } finally {
         setIsUploading(false);
+        // const timeTaken = new Date() - start;
+        // const timeTakenSec = timeTaken / 1000;
+        // console.log(timeTakenSec, 'time taken in  page');
       }
     }
   };
@@ -247,7 +251,7 @@ const TryItOutPage = () => {
   };
 
   return (
-    <div className="min-h-screen py-16 pt-20">
+    <div className="min-h-screen py-8">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
           Peek into Your Pet's Emotions

@@ -42,3 +42,8 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.menu .active {
+  color: #f59e0b !important; /* Uses the accent color from your theme */
+  background-color: transparent !important;
+}
