@@ -30,6 +30,15 @@ const modelOptions = [
   },
 ];
 
+const formatBytes = (bytes: number, decimals: number) => {
+  if (bytes == 0) return '0 Bytes';
+  var k = 1024,
+    dm = decimals || 2,
+    sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+    i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+};
+
 const TryItOutPage = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
@@ -61,7 +70,9 @@ const TryItOutPage = () => {
       // Check file size (max 4.5 MB)
       const maxSize = 4.5 * 1024 * 1024; // 4.5 MB in bytes
       if (file.size > maxSize) {
-        setError('File size exceeds 4.5 MB. Please upload a smaller image.');
+        setError(
+          `File size exceeds 4.5 MB. Please upload a smaller image. Provided file size: ${formatBytes(file.size, 2)}`
+        );
         resolve(false);
         return;
       }
@@ -71,12 +82,12 @@ const TryItOutPage = () => {
       img.onload = () => {
         if (img.width < 300 || img.height < 300) {
           setError(
-            'Image dimensions are too small. Minimum size is 300x300 pixels.'
+            `Image dimensions are too small. Minimum size is 300x300 pixels. Provided dimensions: ${img.width}x${img.height} pixels.`
           );
           resolve(false);
         } else if (img.width > 4032 || img.height > 4032) {
           setError(
-            'Image dimensions are too large. Maximum size is 4032x4032 pixels.'
+            `Image dimensions are too large. Maximum size is 4032x4032 pixels. Provided dimensions: ${img.width}x${img.height} pixels.`
           );
           resolve(false);
         } else {
