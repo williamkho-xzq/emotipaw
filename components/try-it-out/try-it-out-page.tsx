@@ -191,14 +191,37 @@ const TryItOutPage = () => {
     }
   };
 
-  const analyzeImage = async (imageUrl: string): Promise<string> => {
+  const analyzeImagePro = async (imageUrl: string): Promise<string> => {
     try {
-      const response = await fetch('/api/analyze-emotion', {
+      const response = await fetch('/api/emotion/analyze/pro', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ imageUrl }),
+      });
+
+      if (!response.ok) {
+        console.error('Error analyzing image:', response.json());
+        throw new Error('Failed to analyze the image');
+      }
+
+      return response.json();
+    } catch (error) {
+      console.error('Error analyzing image:', error);
+      throw new Error('Failed to analyze the image');
+    }
+  };
+
+  const analyzeImageLite = async (): Promise<string> => {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+
+      const response = await fetch('/api/emotion/analyze/lite', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
       if (!response.ok) {
@@ -220,11 +243,9 @@ const TryItOutPage = () => {
     try {
       let result;
       if (selectedOption.value === ModelType.LITE) {
-        result = await analyzeImage(uploadedImageUrl);
+        result = await analyzeImageLite();
       } else {
-        // Placeholder for advanced analysis
-        console.log('Advanced analysis selected');
-        result = 'Advanced analysis results would appear here.';
+        result = await analyzeImagePro(uploadedImageUrl);
       }
 
       setAnalysisResult(result);
