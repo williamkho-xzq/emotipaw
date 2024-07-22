@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { Upload, Wand2, AlertCircle, Option } from 'lucide-react';
+import { Upload, Wand2 } from 'lucide-react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import NewFeatureBanner from '@/components/try-it-out/new-feature-banner';
@@ -10,6 +10,7 @@ import {
   Option as ModelSelectOption,
 } from '@/components/try-it-out/model-select';
 import { ModelType } from '@/types';
+import { useSearchParams } from 'next/navigation';
 
 // Create a custom axios instance with default configuration
 const axiosInstance = axios.create({
@@ -40,6 +41,9 @@ const TryItOutPage = () => {
   const [selectedOption, setSelectedOption] = useState<ModelSelectOption>(
     modelOptions[0]
   );
+
+  const searchParams = useSearchParams();
+  const modeParam = searchParams.get('v') || '';
 
   const validateImage = (file: File): Promise<boolean> => {
     return new Promise((resolve) => {
@@ -159,7 +163,6 @@ const TryItOutPage = () => {
     const file = event.target.files?.[0];
     if (file) {
       setError(null);
-      // const start = new Date();
       try {
         setIsUploading(true);
         const isValid = await validateImage(file);
@@ -184,9 +187,6 @@ const TryItOutPage = () => {
         setUploadedImageUrl(null);
       } finally {
         setIsUploading(false);
-        // const timeTaken = new Date() - start;
-        // const timeTakenSec = timeTaken / 1000;
-        // console.log(timeTakenSec, 'time taken in  page');
       }
     }
   };
@@ -242,10 +242,19 @@ const TryItOutPage = () => {
     setError(null);
     try {
       let result;
-      if (selectedOption.value === ModelType.LITE) {
-        result = await analyzeImageLite();
+
+      if (modeParam === '1') {
+        if (selectedOption.value === ModelType.LITE) {
+          result = await analyzeImagePro(uploadedImageUrl);
+        } else {
+          result = await analyzeImageLite();
+        }
       } else {
-        result = await analyzeImagePro(uploadedImageUrl);
+        if (selectedOption.value === ModelType.LITE) {
+          result = await analyzeImageLite();
+        } else {
+          result = await analyzeImagePro(uploadedImageUrl);
+        }
       }
 
       setAnalysisResult(result);

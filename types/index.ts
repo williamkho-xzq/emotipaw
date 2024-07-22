@@ -23,5 +23,5 @@ export interface EmotionResult {
 
 export enum ModelType {
   LITE = 'Lite',
-  PRO = 'Expert',
+  PRO = 'Pro',
 }
