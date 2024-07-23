@@ -10,7 +10,6 @@ import {
   Option as ModelSelectOption,
 } from '@/components/try-it-out/model-select';
 import { ModelType } from '@/types';
-import { useSearchParams } from 'next/navigation';
 
 // Create a custom axios instance with default configuration
 const axiosInstance = axios.create({
@@ -51,8 +50,8 @@ const TryItOutPage = () => {
     modelOptions[0]
   );
 
-  const searchParams = useSearchParams();
-  const modeParam = searchParams.get('v') || '';
+  const modeParam = process.env.NEXT_PUBLIC_GROUP_MODE;
+  console.log(modeParam);
 
   const validateImage = (file: File): Promise<boolean> => {
     return new Promise((resolve) => {
@@ -254,17 +253,17 @@ const TryItOutPage = () => {
     try {
       let result;
 
-      if (modeParam === '1') {
+      if (modeParam === 'A') {
         if (selectedOption.value === ModelType.LITE) {
-          result = await analyzeImagePro(uploadedImageUrl);
-        } else {
           result = await analyzeImageLite();
+        } else {
+          result = await analyzeImagePro(uploadedImageUrl);
         }
       } else {
         if (selectedOption.value === ModelType.LITE) {
-          result = await analyzeImageLite();
-        } else {
           result = await analyzeImagePro(uploadedImageUrl);
+        } else {
+          result = await analyzeImageLite();
         }
       }
 
