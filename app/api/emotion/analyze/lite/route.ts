@@ -6,7 +6,7 @@ const emotions = [
   'anger',
   'sad',
   'disgust',
-  'surprise',
+  'surprised',
   'curious',
   'affectionate',
   'anxious',
@@ -54,7 +54,7 @@ These signs collectively indicate a state of sadness or depression in the pet. T
 
 This combination of facial contortions and avoidance body language indicates a state of disgust in the pet. The animal shows a strong aversion to something in its environment, experiencing a smell, taste, or sight that it finds extremely unpleasant. This disgusted state demonstrates that the pet is experiencing significant discomfort and a desire to avoid or remove itself from the offending stimulus at this moment.`,
 
-    surprise: `The pet appears to be surprised. Here are the indicators:
+    surprised: `The pet appears to be surprised. Here are the indicators:
 
 **Facial Expression**: The eyes are wide open, with the whites of the eyes more visible than usual. The facial muscles are tense, particularly around the eyes and forehead area. The ears are erect and forward-facing, showing alertness and attention.
 
