@@ -258,14 +258,10 @@ const TryItOutPage = () => {
     setError(null);
     try {
       let result;
-      console.log(`the mode : ${modeParam}`);
       if (modeParam === 'A') {
-        console.log(`Entered mode : ${modeParam}`);
-
         if (selectedOption.value === ModelType.LITE) {
           result = await analyzeImageLite();
         } else {
-          console.log(`Entered mode asdsad : ${selectedOption.value}`);
           result = await analyzeImagePro(uploadedImageUrl);
         }
       } else {
