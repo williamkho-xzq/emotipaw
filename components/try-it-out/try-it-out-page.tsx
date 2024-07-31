@@ -203,6 +203,7 @@ const TryItOutPage = () => {
   };
 
   const analyzeImagePro = async (imageUrl: string): Promise<string> => {
+    const startTime = Date.now();
     try {
       const response = await fetch('/api/emotion/analyze/pro', {
         method: 'POST',
@@ -221,6 +222,10 @@ const TryItOutPage = () => {
     } catch (error) {
       console.error('Error analyzing image:', error);
       throw new Error('Failed to analyze the image');
+    } finally {
+      const endTime = Date.now();
+      const elapsedTime = (endTime - startTime) / 1000;
+      console.log(`Elapsed time gpt is ${elapsedTime} seconds`);
     }
   };
 
