@@ -188,6 +188,7 @@ const TryItOutPage = () => {
           setAnalysisResult(null);
         }
       } catch (error) {
+        console.error('Error uploading image:', error);
         if (error instanceof Error) {
           setError(error.message);
         } else {
