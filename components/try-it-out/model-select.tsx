@@ -18,7 +18,7 @@ export function ModelSelect({
   selectedOption,
   onChange,
 }: ModelSelectProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleToggle = useCallback(() => setIsOpen((prev) => !prev), []);
 
