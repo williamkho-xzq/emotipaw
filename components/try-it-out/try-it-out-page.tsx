@@ -259,7 +259,7 @@ const TryItOutPage = () => {
     try {
       let result;
       console.log(`the mode : ${modeParam}`);
-      if (modeParam === 'A') {
+      if (modeParam == 'A') {
         console.log(`Entered mode : ${modeParam}`);
 
         if (selectedOption.value === ModelType.LITE) {
