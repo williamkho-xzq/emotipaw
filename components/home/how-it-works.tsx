@@ -33,7 +33,7 @@ export default function HowItWorks() {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 text-primary">
+        <h2 className="text-4xl font-bold text-center mb-12 text-primary">
           Decode Your Pet's Emotions in 3 Easy Steps
         </h2>
         <div className="space-y-16">
@@ -56,7 +56,7 @@ export default function HowItWorks() {
                 <div className="flex items-center mb-4">
                   <step.icon className="text-4xl text-primary mr-4" />
                   <h3 className="text-2xl font-semibold text-gray-800">
-                    {step.title}
+                    {`${index + 1}. `} {step.title}
                   </h3>
                 </div>
                 <p className="text-lg text-gray-600 leading-relaxed">
