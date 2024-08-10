@@ -10,6 +10,7 @@ import {
   Option as ModelSelectOption,
 } from '@/components/try-it-out/model-select';
 import { ModelType } from '@/types';
+import Resizer from 'react-image-file-resizer';
 
 // Create a custom axios instance with default configuration
 const axiosInstance = axios.create({
@@ -135,6 +136,26 @@ const TryItOutPage = () => {
     fileInputRef.current?.click();
   };
 
+  const dataURLtoFile = (dataurl: string, filename: string): File => {
+    const arr = dataurl.split(',');
+    const mime = arr[0].match(/:(.*?);/)![1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  };
+
+  const resizeFile = (file: File): Promise<File> =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(file, 3024, 3024, 'JPEG', 95, 0, (uri) => {
+        const resizedFile = dataURLtoFile(uri as string, file.name);
+        resolve(resizedFile);
+      });
+    });
+
   const uploadToLocalFolder = async (file: File): Promise<string> => {
     try {
       const formData = new FormData();
@@ -177,13 +198,14 @@ const TryItOutPage = () => {
         setIsUploading(true);
         const isValid = await validateImage(file);
         if (isValid) {
+          const newImage = await resizeFile(file);
           //   For production: use getPresignedUrl and uploadToS3
           //   const presignedUrl = await getPresignedUrl(file.name, file.type);
           //   const uploadedUrl = await uploadToS3(presignedUrl, file);
 
           //   For local testing: use uploadToLocalFolder
-          const uploadedUrl = await uploadToLocalFolder(file);
-          setSelectedImage(URL.createObjectURL(file));
+          const uploadedUrl = await uploadToLocalFolder(newImage);
+          setSelectedImage(URL.createObjectURL(newImage));
           setUploadedImageUrl(uploadedUrl);
           setAnalysisResult(null);
         }
@@ -355,7 +377,7 @@ const TryItOutPage = () => {
               <p className="text-sm text-gray-500 text-center mt-2">
                 Accepted formats: JPG, JPEG, PNG, GIF
                 <br />
-                Min size: 300x300 pixels | Max size: 4000x4000 pixels, 4.5 MB
+                Min size: 300x300 pixels | Max size: 4096x4096 pixels, 4.5 MB
               </p>
             </div>
 
