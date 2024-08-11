@@ -85,9 +85,9 @@ const TryItOutPage = () => {
             `Image dimensions are too small. Minimum size is 300x300 pixels. Provided dimensions: ${img.width}x${img.height} pixels.`
           );
           resolve(false);
-        } else if (img.width > 4032 || img.height > 4032) {
+        } else if (img.width > 4096 || img.height > 4096) {
           setError(
-            `Image dimensions are too large. Maximum size is 4032x4032 pixels. Provided dimensions: ${img.width}x${img.height} pixels.`
+            `Image dimensions are too large. Maximum size is 4096x4096 pixels. Provided dimensions: ${img.width}x${img.height} pixels.`
           );
           resolve(false);
         } else {
