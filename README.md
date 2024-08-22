@@ -16,7 +16,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Next, in order to have a fully functional website you need to create an environment variable file named with this format
+Next, in order to have a fully functional website locally, you will need to create an environment variable file named `.env.development.local` with this format
 ```
 NEXT_PUBLIC_GROUP_MODE="A"
 BLOB_READ_WRITE_TOKEN="" #refer to this link to get vercel's blob token https://vercel.com/docs/storage/vercel-blob
